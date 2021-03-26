@@ -16,6 +16,12 @@
             max-width: 600px;
             margin: auto;
         }
+
+        #result {
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+        }
     </style>
 
     <script src="decryptVietnamese.js" defer></script>
@@ -37,13 +43,14 @@
     </p>
     <p>+ Sau đó nhập chuỗi đã mã hóa vào dưới đây.</p>
 
-    <textarea rows="10" cols="50" id="inp-ciphertext"
+    <textarea rows="5" cols="50" id="inp-ciphertext" onkeyup="decrypt()" onchange="decrypt()"
         placeholder="Nhập chuỗi tiếng việt (không dấu) đã được mã hóa Caesar.."></textarea>
-    <button onclick="decrypt()">Giải mã</button>
 
     <br>
-    <p>Kết quả giải mã:</p>
-    <h3 id="result"></h3>
+    <p>Giải mã:
+        <span id="result"></span>
+    </p>
+
 </body>
 
 </html>

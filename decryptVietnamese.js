@@ -28,7 +28,10 @@ function decryptCaesarCipherVietnamese(ct) {
     }
   }
 
-  return result;
+  return {
+    plaintext: result,
+    ratio: Math.round((bestScore / ct.length) * 100 * 100) / 100,
+  };
 }
 
 /* 
@@ -76,6 +79,6 @@ function getScore(str, checker) {
 
 function decrypt() {
   let ciphertext = document.getElementById("inp-ciphertext").value;
-  let result = decryptCaesarCipherVietnamese(ciphertext);
-  document.getElementById("result").innerHTML = result;
+  let { plaintext, ratio } = decryptCaesarCipherVietnamese(ciphertext);
+  document.getElementById("result").innerHTML = `${plaintext} - ${ratio}%`;
 }
