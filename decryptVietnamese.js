@@ -22,7 +22,7 @@ function decryptCaesarCipherVietnamese(ct) {
 
     let score = getTotalScore(pt);
     // logs += `key=${shift} => score=${score} : ${pt}\n`;
-    if (score > bestScore) {
+    if (score >= bestScore) {
       bestScore = score;
       result = pt;
     }
@@ -80,5 +80,5 @@ function getScore(str, checker) {
 function decrypt() {
   let ciphertext = document.getElementById("inp-ciphertext").value;
   let { plaintext, ratio } = decryptCaesarCipherVietnamese(ciphertext);
-  document.getElementById("result").innerHTML = `${plaintext} - ${ratio}%`;
+  document.getElementById("result").innerHTML = `${plaintext} - <span style="color:red">${ratio}%<span>`;
 }
