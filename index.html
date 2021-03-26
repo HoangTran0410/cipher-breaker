@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check vietnamese text</title>
+
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            max-width: 600px;
+            margin: auto;
+        }
+    </style>
+
+    <script src="decryptVietnamese.js" defer></script>
+</head>
+
+<body>
+    <img src="./debai.png" alt="De bai" width="600px" style="border: 2px solid black;">
+    <pre>
+Ý tưởng:
+   B1: Tạo ra 26 bản decrypt từ ciphertext đầu vào
+   B2: Tìm những tổ hợp phụ âm, nguyên âm, ... của tiếng việt trong từng bản decrypt
+   B3: Tính điểm (dựa trên độ dài của tổ hợp tìm được) cho từng bản decrypt
+   B4: Lấy bản decrypt có số điểm cao nhất.
+    </pre>
+
+    <p>+ Tạo 1 chuỗi tiếng viêt không dấu tại <a target="_blank" href="https://tienich.bambu.vn/towiac.aspx">Đây</a></p>
+    <p>+ Mã hóa chuỗi Tiếng Việt (không dấu) tại: <a target="_blank"
+            href="https://cryptii.com/pipes/caesar-cipher">cryptii.com</a>.
+    </p>
+    <p>+ Sau đó nhập chuỗi đã mã hóa vào dưới đây.</p>
+
+    <textarea rows="10" cols="50" id="inp-ciphertext"
+        placeholder="Nhập chuỗi tiếng việt (không dấu) đã được mã hóa Caesar.."></textarea>
+    <button onclick="decrypt()">Giải mã</button>
+
+    <br>
+    <p>Kết quả giải mã:</p>
+    <h3 id="result"></h3>
+</body>
+
+</html>
