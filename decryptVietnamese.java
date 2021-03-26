@@ -18,7 +18,7 @@ public class CheckVietNamese {
   static String vanHoaAm = "eo,ao,ai,oi,eu,ia,iu,ui,uu,ua";
   static String vanHopAmLoai1 = "ay,au";
   static String vanHopAmLoai2 =
-    "oac,oam,oan,oat,oang,uan,uat,uang,ieu,iec,iem,ien,iep,iet,ieng,yeu,yem,yen,uoi,uoc,uom,,uon,uop,uot,uong";
+    "oac,oam,oan,oat,oang,uan,uat,uang,ieu,iec,iem,ien,iep,iet,ieng,yeu,yem,yen,uoi,uoc,uom,uon,uop,uot,uong";
 
   public static void main(String[] args) {
     String ciphertext = "Dtys gtpy nly yza wpy nwlddczzx qtwp xl yrfzy, lys nsfa vpe bfl nslj, nzxxpye ctpyr vst yza mlt szln rst nsf eczyr xl yrfzy j efzyr wlx.";

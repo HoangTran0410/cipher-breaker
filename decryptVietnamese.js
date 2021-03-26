@@ -1,3 +1,18 @@
+function decrypt() {
+  let ciphertext = document.getElementById("inp-ciphertext").value;
+  let { plaintext, ratio } = decryptCaesarCipherVietnamese(ciphertext);
+  let resultText = `${plaintext} - <span style="color:red">${ratio}%<span>`;
+  document.getElementById("result").innerHTML = resultText;
+}
+
+/* 
+  Ý tưởng 1 : Dựa vào các tổ hợp âm trong tiếng việt
+   B1: Tạo ra 26 bản decrypt từ ciphertext đầu vào
+   B2: Tìm những tổ hợp phụ âm, nguyên âm, ... của tiếng việt trong từng bản decrypt
+   B3: Tính điểm (dựa trên độ dài của tổ hợp tìm được) cho từng bản decrypt
+   B4: Lấy bản decrypt có số điểm cao nhất.
+   */
+
 function decryptCaesarCipherVietnamese(ct) {
   let result = "";
   let bestScore = 0;
@@ -34,14 +49,6 @@ function decryptCaesarCipherVietnamese(ct) {
   };
 }
 
-/* 
-  Ý tưởng:
-   B1: Tạo ra 26 bản decrypt từ ciphertext đầu vào
-   B2: Tìm những tổ hợp phụ âm, nguyên âm, ... của tiếng việt trong từng bản decrypt
-   B3: Tính điểm (dựa trên độ dài của tổ hợp tìm được) cho từng bản decrypt
-   B4: Lấy bản decrypt có số điểm cao nhất.
-   */
-
 // https://mltav.asn.au/vietnamese/images/documents/Van/wa-van.pdf
 const phuam = "ch,gh,kh,ng,ngh,nh,ph,th,tr,gi,qu";
 const banNguyenAm = "oa,oe,uy,ue";
@@ -51,7 +58,7 @@ const vanDonGian =
 const vanHoaAm = "eo,ao,ai,oi,eu,ia,iu,ui,uu,ua";
 const vanHopAmLoai1 = "ay,au";
 const vanHopAmLoai2 =
-  "oac,oam,oan,oat,oang,uan,uat,uang,ieu,iec,iem,ien,iep,iet,ieng,yeu,yem,yen,uoi,uoc,uom,,uon,uop,uot,uong";
+  "oac,oam,oan,oat,oang,uan,uat,uang,ieu,iec,iem,ien,iep,iet,ieng,yeu,yem,yen,uoi,uoc,uom,uon,uop,uot,uong";
 
 function getTotalScore(s) {
   let totalScore = 0;
@@ -77,8 +84,15 @@ function getScore(str, checker) {
   return score;
 }
 
-function decrypt() {
-  let ciphertext = document.getElementById("inp-ciphertext").value;
-  let { plaintext, ratio } = decryptCaesarCipherVietnamese(ciphertext);
-  document.getElementById("result").innerHTML = `${plaintext} - <span style="color:red">${ratio}%<span>`;
-}
+/* 
+  Ý tưởng 2: Dựa vào tần suất xuất hiện
+   B1: 
+   */
+
+// https://vi.wiktionary.org/wiki/Wiktionary:B%E1%BA%A3ng_t%E1%BA%A7n_s%E1%BB%91/Ti%E1%BA%BFng_Vi%E1%BB%87t
+const tanSuat = "n,a,o,h,i,u,g,t,c,e,d,m,y,l,r,b,v,s,k,p,x,q";
+
+
+
+// ============================ demo text ================================
+decrypt();
