@@ -30,6 +30,31 @@ function removeVietnameseTones(str) {
   return str;
 }
 
+function removeAccents(str) {
+  var AccentsMap = [
+    "aàảãáạăằẳẵắặâầẩẫấậ",
+    "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+    "dđ",
+    "DĐ",
+    "eèẻẽéẹêềểễếệ",
+    "EÈẺẼÉẸÊỀỂỄẾỆ",
+    "iìỉĩíị",
+    "IÌỈĨÍỊ",
+    "oòỏõóọôồổỗốộơờởỡớợ",
+    "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+    "uùủũúụưừửữứự",
+    "UÙỦŨÚỤƯỪỬỮỨỰ",
+    "yỳỷỹýỵ",
+    "YỲỶỸÝỴ",
+  ];
+  for (var i = 0; i < AccentsMap.length; i++) {
+    var re = new RegExp("[" + AccentsMap[i].substr(1) + "]", "g");
+    var char = AccentsMap[i][0];
+    str = str.replace(re, char);
+  }
+  return str;
+}
+
 function round(num, fragtionDigits = 2) {
   let m = 10;
   while (fragtionDigits--) {
@@ -38,10 +63,43 @@ function round(num, fragtionDigits = 2) {
   return Math.round((num + Number.EPSILON) * m) / m;
 }
 
-// https://www.sttmedia.com/characterfrequency-vietnamese
+function getFreqs(str) {
+  // Step 1: copy table data to variable
 
-// Step 1: copy table to a
-let a = `A	5.29 %
+  // Step 2: get key-value
+  let a = str.split("\n");
+  a = a.map((_) => _.split("	"));
+  a = a.map((_) => [_[0], Number(_[1].split(" ")[0]) / 100]);
+
+  // Step 3: remove vietnamese tones
+  let freq = {};
+  for (let _ of a) {
+    let c = removeAccents(_[0]);
+    if (freq[c]) {
+      freq[c] += _[1];
+    } else {
+      freq[c] = _[1];
+    }
+  }
+
+  // Step 4: round values
+  for (let key in freq) {
+    freq[key] = round(freq[key], 5);
+  }
+
+  // Step 5: convert to array
+  let freqArr = [];
+  for (let key in freq) {
+    freqArr.push(freq[key]);
+  }
+
+  console.log(freqArr);
+  return freqArr;
+}
+
+// https://www.sttmedia.com/characterfrequencies
+// https://www.sttmedia.com/characterfrequency-vietnamese
+let vietnamese = `A	5.29 %
 Ă	0.23 %
 Ấ	0.63 %
 À	2.47 %
@@ -61,7 +119,7 @@ let a = `A	5.29 %
 B	1.50 %
 C	6.71 %
 D	0.88 %
-Ð	3.09 %
+Đ	3.09 %
 E	1.45 %
 Ẽ	0.18 %
 Ề	0.39 %
@@ -124,20 +182,4 @@ Y	1.39 %
 Ý	0.10 %
 Z	0.04 %`;
 
-// Step 2:
-a = a.split("\n");
-a = a.map((_) => _.split("	"));
-a = a.map((_) => [_[0], Number(_[1].split(" ")[0]) / 100]);
-
-let result = {};
-for (let _ of a) {
-  let c = removeVietnameseTones(_[0]);
-  if (result[c]) {
-    result[c] += _[1];
-  } else {
-    result[c] = _[1];
-  }
-  console.log(_[0])
-}
-
-console.log(result);
+getFreqs(vietnamese);
