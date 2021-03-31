@@ -60,8 +60,14 @@ const FREQS = {
   ],
 };
 
+const COMMON = {
+  VIETNAMESE:
+    "ch,gh,kh,ng,ngh,nh,ph,th,tr,gi,qu,oa,oe,uy,ue,ic,ich,im,in,inh,ip,it,uc,un,ung,ut,um,up,ech,em,en,enh,ep,et,om,on,op,ot,ac,am,an,ang,ap,at,oc,ong,ec,eng,ach,anh,eo,ao,ai,oi,eu,ia,iu,ui,uu,ua,ay,au,oac,oam,oan,oat,oang,uan,uat,uang,ieu,iec,iem,ien,iep,iet,ieng,yeu,yem,yen,uoi,uoc,uom,uon,uop,uot,uong",
+};
+
 let app = new (function () {
-  let textElem = document.getElementById("text");
+  let cipherElem = document.getElementById("cipher");
+  let originalElem = document.getElementById("original");
   let langElem = document.getElementById("language");
   let shiftElem = document.getElementById("shift");
   let guessesElem = document.getElementById("guesses");
@@ -78,7 +84,7 @@ let app = new (function () {
 
   this.doBreak = function () {
     outputState = {};
-    outputState.inputText = textElem.value;
+    outputState.inputText = cipherElem.value;
     outputState.language = langElem.value;
 
     outputState.entropies = getAllEntropies(
@@ -100,7 +106,7 @@ let app = new (function () {
     if (outputState === null) return;
 
     outputState.shift = mod(outputState.shift + delta, 26);
-    textElem.value = decrypt(outputState.inputText, outputState.shift);
+    originalElem.value = decrypt(outputState.inputText, outputState.shift);
     shiftElem.textContent = outputState.shift.toString();
 
     // Build table of best guesses
