@@ -16,6 +16,10 @@ table.noborder>*>tr>th {
     border: none;
 }
 
+textarea {
+    flex: 1
+}
+
 #guesses tr.active div.bar {
     background: #60A0FF;
 }
